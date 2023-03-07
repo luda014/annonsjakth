@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         //Skapa handler för PostDelay
         final Handler handler = new Handler();
 
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -24,6 +29,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        }, 1400); // swap to 1200
+        }, 3000); // swap to 1200
     }
 }

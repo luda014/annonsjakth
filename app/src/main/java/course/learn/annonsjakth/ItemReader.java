@@ -17,27 +17,31 @@ public class ItemReader {
     private static final String JSON_URL = "https://raw.githubusercontent.com/luda014/annosjakt/main/trending_items.json";
 
     public static void Fetch() {
-        String jsonString = readJsonFromUrl(JSON_URL);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonObject[] items = gson.fromJson(jsonString, JsonObject[].class);
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String jsonString = readJsonFromUrl(JSON_URL);
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                JsonObject[] items = gson.fromJson(jsonString, JsonObject[].class);
 
-        int counter = 0;
-        for (JsonObject item : items) {
-            if (counter >= 10) {
-                break;
+                for (JsonObject item : items) {
+
+                    String name = item.get("name").getAsString();
+                    JsonObject price = item.getAsJsonObject("price_SE");
+                    int amount = price.get("amount").getAsInt();
+                    String currency = price.get("currency").getAsString();
+                    String type = item.get("type").getAsString();
+                    String[] images = gson.fromJson(item.get("images"), String[].class);
+
+                    System.out.printf("Name: %s\nPrice: %d %s\nType: %s\nImages: %s\n\n", name, amount, currency, type, String.join(", ", images));
+
+
+                }
             }
-            String name = item.get("name").getAsString();
-            JsonObject price = item.getAsJsonObject("price_SE");
-            int amount = price.get("amount").getAsInt();
-            String currency = price.get("currency").getAsString();
-            String type = item.get("type").getAsString();
-            String[] images = gson.fromJson(item.get("images"), String[].class);
+        });
+        thread.start();
+}
 
-            System.out.printf("Name: %s\nPrice: %d %s\nType: %s\nImages: %s\n\n", name, amount, currency, type, String.join(", ", images));
-            counter++;
-
-        }
-    }
 
     public static String readJsonFromUrl(String url) {
         String jsonString = "";
