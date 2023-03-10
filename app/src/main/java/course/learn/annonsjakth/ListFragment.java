@@ -57,7 +57,6 @@ public class ListFragment extends Fragment {
         return view;
     }
 
-
     private class MyTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {

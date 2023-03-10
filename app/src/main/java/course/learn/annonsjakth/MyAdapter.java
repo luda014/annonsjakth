@@ -1,12 +1,15 @@
 package course.learn.annonsjakth;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -45,6 +48,28 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         // Use Picasso or Glide for loading the image
         Picasso.get().load(imageUrl).into(holder.imageImgView);
+
+        // Set the OnClickListener on the entire view
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create a new instance of the ItemFragment
+                ItemFragment itemFragment = new ItemFragment();
+
+                // Pass the item data to the ItemFragment using a Bundle
+                Bundle bundle = new Bundle();
+                bundle.putString("type", type);
+                bundle.putString("imageUrl", imageUrl);
+                bundle.putString("amount", amount);
+                itemFragment.setArguments(bundle);
+
+                // Replace the current fragment with the ItemFragment
+                FragmentTransaction transaction = ((FragmentActivity) context).getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frameLayout, itemFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
     }
 
     @Override
