@@ -73,7 +73,7 @@ public class ListFragment extends Fragment {
 
                 int count = 0; // to keep track of the number of items
                 for (JsonElement hitElement : hitsArray) {
-                    if (count >= 10) { // break the loop after getting 10 items
+                    if (count >= 40) { // break the loop after getting 40 items
                         break;
                     }
                     JsonObject hitObject = hitElement.getAsJsonObject();

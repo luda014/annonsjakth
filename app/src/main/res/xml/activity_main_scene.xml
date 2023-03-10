@@ -21,8 +21,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="10"
-            android:scaleY="10" />
+            android:scaleX="0"
+            android:scaleY="0" />
         <Constraint
             android:id="@+id/vitAnnosnJakt"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -31,8 +31,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="1"
-            android:scaleY="1" />
+            android:scaleX="0"
+            android:scaleY="0" />
         <Constraint
             android:id="@+id/SvartAnnosnJakt"
             android:scaleX="0"
@@ -54,8 +54,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="0"
-            android:scaleY="0" />
+            android:scaleX="10"
+            android:scaleY="10" />
         <Constraint
             android:id="@+id/vitAnnosnJakt"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -64,8 +64,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:scaleX="0"
-            android:scaleY="0" />
+            android:scaleX="3"
+            android:scaleY="3" />
         <Constraint
             android:id="@+id/SvartAnnosnJakt"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -74,8 +74,8 @@
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:scaleY="1"
-            android:scaleX="1"
+            android:scaleY="0"
+            android:scaleX="0"
             motion:transitionEasing="cubic(1,0,1,0)" />
     </ConstraintSet>
 </MotionScene>

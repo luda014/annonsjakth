@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,49 +24,44 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 public class FavoriteFragment extends Fragment {
+
     private RecyclerView mRecyclerView;
     private FavoriteItemAdapter mAdapter;
-    private SharedPreferences mPrefs;
+    private List<FavoriteItem> mFavorites;
+
+    public FavoriteFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFavorites = new ArrayList<>();
+        loadFavoritesFromSharedPreferences();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
-        mPrefs = getContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_favorite, container, false);
 
-        mRecyclerView = view.findViewById(R.id.favorite_list);
+        mRecyclerView = rootView.findViewById(R.id.favorite_list);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        mAdapter = new FavoriteItemAdapter(getContext(), getFavorites());
+        mAdapter = new FavoriteItemAdapter(getContext(), mFavorites);
         mRecyclerView.setAdapter(mAdapter);
 
-        return view;
+        return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mAdapter.setItems(getFavorites());
-    }
-
-
-
-    private List<FavoriteItem> getFavorites() {
-        List<FavoriteItem> favorites = new ArrayList<>();
-        Map<String, ?> allEntries = mPrefs.getAll();
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            String key = entry.getKey();
-            if (key.startsWith("favorite_")) {
-                String value = entry.getValue().toString();
-                String[] parts = value.split(",");
-                if (parts.length == 3) {
-                    String imageUrl = parts[0];
-                    String type = parts[1];
-                    String amount = parts[2];
-                    favorites.add(new FavoriteItem(imageUrl, type, amount));
-                }
-            }
+    private void loadFavoritesFromSharedPreferences() {
+        SharedPreferences prefs = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String imageUrl = prefs.getString("favorite_imageUrl", "");
+        String type = prefs.getString("favorite_type", "");
+        String amount = prefs.getString("favorite_amount", "");
+        if (!TextUtils.isEmpty(imageUrl) && !TextUtils.isEmpty(type) && !TextUtils.isEmpty(amount)) {
+            FavoriteItem item = new FavoriteItem(imageUrl, type, amount);
+            mFavorites.add(item);
         }
-        return favorites;
     }
-
+}
