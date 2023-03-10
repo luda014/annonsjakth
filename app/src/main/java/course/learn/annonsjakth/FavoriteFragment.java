@@ -30,7 +30,7 @@ public class FavoriteFragment extends Fragment {
     private List<FavoriteItem> mFavorites;
 
     public FavoriteFragment() {
-        // Required empty public constructor
+        // Required empty public constructor :)
     }
 
     @Override
