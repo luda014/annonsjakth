@@ -7,11 +7,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 public class HomeFragment extends Fragment {
 
@@ -21,6 +33,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         Button btnkop = (Button) view.findViewById(R.id.btn_buy);
+
 
         btnkop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,4 +52,3 @@ public class HomeFragment extends Fragment {
         return view;
     }
 }
-
